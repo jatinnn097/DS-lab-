@@ -1,0 +1,86 @@
+include <stdio.h>
+#include <stdlib.h>
+#define max 2
+
+struct stack{int a[max];
+int top;
+int item;}s;
+
+void push()
+{
+if (s.top==max-1)
+{
+printf("Stack is overflow");
+}
+else
+{
+s.top++;
+s.a[s.top]=s.item;
+}
+}
+
+
+int pop(){
+if (s.top==-1)
+{
+
+return -1;
+}
+else{
+
+return s.a[s.top--];
+}
+}
+
+void display(){
+if(s.top==-1)
+
+printf("stack is empty");
+
+else{
+
+for(int i=s.top;i>=0;i--)
+
+
+printf("%d\t",s.a[i]);
+
+printf("\n");
+}
+
+}
+int main(){
+     int top=-1;
+    int choice;
+    int  item_deleted;
+    while(1)
+    {
+    printf("1.push() 2.pop() 3.display() 4.exit()");
+    printf("enter the choice");
+    scanf("%d",&choice);
+
+    switch (choice)
+    {
+    case 1:
+    printf("enter element to push elemnt");
+    scanf("%d",&s.item);
+    push();
+    break;
+
+    case 2:item_deleted=pop();
+            if(item_deleted==-1)
+            printf("stack emty");
+            else
+
+
+          printf("item is deleted is %d",item_deleted);
+          break;
+    case 3: display();
+            break;
+    default: exit(0);
+    }}
+    return 0;
+}
+
+ 
+
+
