@@ -1,0 +1,81 @@
+
+ #include <stdio.h>
+#include <stdlib.h>
+#define max 2
+int a[max];
+int top=-1;
+int item;
+void push()
+{
+if (top==max-1)
+{
+printf("Stack is overflow");
+}
+else
+{
+top++;
+a[top]=item;
+}
+}
+
+
+int pop(){
+if (top==-1)
+{
+
+return -1;
+}
+else{
+
+return a[top--];
+}
+}
+
+void display(){
+if(top==-1)
+
+printf("stack is empty");
+
+else{
+
+for(int i=top;i>=0;i--)
+
+
+printf("%d\t",a[i]);
+
+printf("\n");
+}
+
+}
+int main()
+{    int choice;
+    int  item_deleted;
+    while(1)
+    {
+    printf("1.push() 2.pop() 3.display() 4.exit()");
+    printf("enter the choice");
+    scanf("%d",&choice);
+
+    switch (choice)
+    {
+    case 1:
+    printf("enter element to push elemnt");
+    scanf("%d",&item);
+    push();
+    break;
+
+    case 2:item_deleted=pop();
+            if(item_deleted==-1)
+            printf("stack emty");
+            else
+
+
+          printf("item is deleted is %d",item_deleted);
+          break;
+    case 3: display();
+            break;
+    default: exit(0);
+    }}
+    return 0;
+}
+
