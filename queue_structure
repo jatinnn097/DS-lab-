@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define max 2
+struct queue {int a[max];
+int rear ;
+int front;
+int item;}s;
+
+void insert()
+{
+if (s.rear==max-1)
+{
+printf("Queue is overflow");
+}
+else
+{
+s.rear++;
+s.a[s.rear]=s.item;
+}
+}
+
+
+int deletion(){
+if (s.front>s.rear)
+{
+
+return -1;
+}
+else{
+
+return s.a[s.front++];
+}
+}
+
+void display(){
+if(s.front>s.rear)
+
+printf("Queue is empty");
+
+else{
+
+for(int i=s.front;i<=s.rear;i++)
+
+
+printf("%d\t",s.a[i]);
+
+printf("\n");
+}
+
+}
+int main()
+{    int choice;
+         s.front = 0;
+    s.rear = -1;
+
+    int  item_deleted;
+    while(1)
+    {
+    printf("1.push() 2.pop() 3.display() 4.exit()");
+    printf("enter the choice");
+    scanf("%d",&choice);
+
+    switch (choice)
+    {
+    case 1:
+    printf("enter element to push elemnt");
+    scanf("%d",&s.item);
+    insert();
+    break;
+
+    case 2:item_deleted=deletion();
+            if(item_deleted==-1)
+            printf(" Queue empty");
+            else
+
+
+          printf("item is deleted is %d",item_deleted);
+          break;
+    case 3: display();
+            break;
+    default: exit(0);
+    }}
+    return 0;
+}
