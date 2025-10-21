@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define max 2
+int a[max];
+int rear=-1;
+int front=0;
+int item;
+void insert()
+{
+if (rear==max-1)
+{
+printf("Queue is overflow");
+}
+else
+{
+rear++;
+a[rear]=item;
+}
+}
+
+
+int deletion(){
+if (front>rear)
+{
+
+return -1;
+}
+else{
+
+return a[front++];
+}
+}
+
+void display(){
+if(front>rear)
+
+printf("Queue is empty");
+
+else{
+
+for(int i=front;i<=rear;i++)
+
+
+printf("%d\t",a[i]);
+
+printf("\n");
+}
+
+}
+int main()
+{    int choice;
+    int  item_deleted;
+    while(1)
+    {
+    printf("1.push() 2.pop() 3.display() 4.exit()");
+    printf("enter the choice");
+    scanf("%d",&choice);
+
+    switch (choice)
+    {
+    case 1:
+    printf("enter element to push elemnt");
+    scanf("%d",&item);
+    insert();
+    break;
+
+    case 2:item_deleted=deletion();
+            if(item_deleted==-1)
+            printf(" Queue empty");
+            else
+
+
+          printf("item is deleted is %d",item_deleted);
+          break;
+    case 3: display();
+            break;
+    default: exit(0);
+    }}
+    return 0;
+}
