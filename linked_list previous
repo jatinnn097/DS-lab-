@@ -1,0 +1,104 @@
+struct node {
+    int info;
+    struct node *link;
+};
+typedef struct node * NODE;
+NODE getnode() {
+    NODE X;
+    X = (NODE)malloc(sizeof(struct node));
+    return X;
+}
+
+void freenode(NODE X) {
+    free(X);
+}
+NODE insert_front(NODE first, int item) {
+    NODE temp;
+    temp = getnode();
+    temp->info = item;
+    temp->link = first;
+    return temp;
+}
+NODE insert_rear(int item, NODE first) {
+    NODE temp, cur;
+    temp = getnode();
+    temp->info = item;
+    temp->link = NULL;
+    if (first == NULL)
+        return temp;
+    cur = first;
+    while (cur->link != NULL)
+        cur = cur->link;
+    cur->link = temp;
+    return first;
+}
+NODE delete_front(NODE first) {
+    NODE temp;
+    if (first == NULL) {
+        printf("List is empty\n");
+        return first;
+    }
+    temp = first;
+    first = first->link;
+    printf("Deleted data is %d\n", temp->info);
+    freenode(temp);
+    return first;
+}
+void display(NODE first) {
+    NODE temp;
+    int count = 0;
+    if (first == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+    printf("Contents of the Linked list are:\n");
+    temp = first;
+    while (temp != NULL) {
+        printf("%d ", temp->info);
+        temp = temp->link;
+        count++;
+    }
+    printf("\nNumber of nodes in the list are: %d\n", count);
+}
+
+void reverse(NODE cur, NODE rev, NODE first, NODE prev, NODE next){
+cur=first;
+prev=NULL;
+while(cur!=NULL){
+next=cur->link;
+cur->link=first; 
+prev=cur;
+cur=next;
+}
+return prev;
+}
+int main() {
+    int choice, item;
+    NODE first = NULL;
+    for (;;) {
+        printf("\nEnter your choice\n1 Insert Front\n2 Delete Front\n3 Display\n4 Insert Rear\n5 Exit\n");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                printf("Enter the item\n");
+                scanf("%d", &item);
+                first = insert_front(first, item);
+                break;
+            case 2:
+                first = delete_front(first);
+                break;
+            case 3:
+                display(first);
+                break;
+            case 4:
+                printf("Enter the item\n");
+                scanf("%d", &item);
+                first = insert_rear(item, first);
+                break;
+            case 5:
+                exit(0);
+        }
+    }
+    return 0;
+}
+
