@@ -1,0 +1,106 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int info;
+    struct node *link;
+};
+typedef struct node *NODE;
+NODE getnode()
+{
+    NODE choice;
+    choice=(NODE)malloc(sizeof(struct node));
+    if(choice==NULL)
+    {
+        printf("Error! Insufficient Space in memory.");
+        exit(0);
+    }
+    return choice;
+}
+NODE insertrear(int item,NODE first)
+{
+  NODE temp;
+  NODE cur;
+  temp=getnode();
+  temp->info=item;
+  temp->link=NULL;
+  if(first==NULL)
+  {
+    return temp;
+  }
+  cur=first;
+  while(cur->link!=NULL)
+  {
+    cur=cur->link;
+  }
+  cur->link=temp;
+  return first;
+}
+void display(NODE first)
+{
+    NODE temp;
+    if(first==NULL)
+    {
+        printf("Error: List is empty\n");
+        return;
+    }
+    printf("Contents are: \n");
+    temp=first;
+    while(temp!=NULL)
+    {
+        printf("%d ",temp->info);
+        temp=temp->link;
+    }
+printf("\n");
+}
+
+NODE deleterear(NODE first)
+{
+    NODE temp,cur,pre;
+    if(first==NULL)
+    {
+    printf("List is empty\n");
+    return first;
+    }
+    if(first->link==NULL)
+    {
+    printf("Deleted item is %d\n",first->info);
+    free(first);
+    first=NULL;
+    return first;
+    }
+    pre=NULL;
+    cur=first;
+    while(cur->link!=NULL)
+    {
+    pre=cur;
+    cur=cur->link;
+    }
+    printf("Deleted item %d\n",cur->info);
+    free(cur);
+    pre->link=NULL;
+    return first;
+}
+int main()
+{   int choice,item;
+    NODE first=NULL;
+    while(1)
+    {
+        printf("1. PUSH 2. Display 3. POP 4. EXIT\n");
+        printf("Enter your choice\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1: printf("Enter the item to be inserted\n");
+                    scanf("%d",&item);
+                    first=insertrear(item,first);
+                    break;
+            case 2:
+                    display(first);
+                    break;
+            case 3:
+                    first=deleterear(first);
+                    break;
+            default: exit(0);
+
+        }    }}
