@@ -1,0 +1,103 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define que_size 5
+
+struct node
+{
+   int info;
+   struct node *link;
+};
+typedef struct node *NODE;
+NODE getnode()
+{
+  NODE x;
+  x=(NODE)malloc(sizeof(struct node));
+  if(x==NULL)
+  {
+    printf("out of memory\n");
+    exit(0);
+  }
+  return x;
+}
+
+NODE insertrear(int item,NODE first)
+{
+  NODE temp;
+  NODE cur;
+  temp=getnode();
+  temp->info=item;
+  temp->link=NULL;
+  if(first==NULL)
+  {
+    return temp;
+  }
+  cur=first;
+  while(cur->link!=NULL)
+  {
+    cur=cur->link;
+  }
+  cur->link=temp;
+  return first;
+}
+
+NODE delfront(NODE delfirst,NODE first)
+{
+  NODE temp;
+  if(first==NULL)
+  {
+     printf("list is empty\n");
+     return first;
+  }
+  temp=first;
+  temp=temp->link;
+  printf("item deleted = %d\n",first->info);
+  free(first);
+  return temp;
+}
+
+void display(NODE first)
+{
+  NODE temp;
+  if(first==NULL)
+  {
+    printf("list is empty\n");
+    return;
+  }
+  printf("the contents of the queue are\n");
+  temp=first;
+  while(temp!=NULL)
+  {
+    printf("%d ",temp->info);
+    temp=temp->link;
+  }
+  printf("\n");
+}
+void main()
+{
+   NODE first=NULL;
+   int choice,item,delfirst;
+   while(1)
+   {
+     printf("1:Insert 2:Delete 3:Display 4:Exit\n");
+     printf("enter the choice\n");
+     scanf("%d",&choice);
+     switch(choice)
+     {
+        case 1:
+        printf("enter item to be inserted\n");
+        scanf("%d",&item);
+        first=insertrear(item,first);
+        break;
+
+        case 2:
+        first=delfront(delfirst,first);
+        break;
+
+        case 3:
+        display(first);
+        break;
+        default: exit(0);
+     }
+   }
+}
+
